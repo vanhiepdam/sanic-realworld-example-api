@@ -1,0 +1,50 @@
+version: 2.1
+
+jobs:
+  build-and-test:
+    docker:
+      - image: circleci/python:3.6.8-jessie
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: hello_world
+
+      - image: circleci/postgres:12.1-alpine-ram
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - pip-cache-{{ checksum "requirements.txt" }}
+
+      - run:
+          name: Install Dependencies
+          command: |
+            sudo pip install codecov
+            pip install --user -r requirements.txt
+      - save_cache:
+          key: pip-cache-{{ checksum "requirements.txt" }}
+          paths:
+            - /home/circleci/.local/lib/
+
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run:
+          name: run tests
+          command: pytest
+
+      - run:
+          name: create report
+          command: coverage report
+      - run:
+          name: upload report
+          command: bash <(curl -s https://codecov.io/bash)
+
+
+workflows:
+  version: 2.1
+  build_and_test:
+    jobs:
+      - build-and-test
