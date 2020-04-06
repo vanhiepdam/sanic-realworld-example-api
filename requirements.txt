@@ -12,7 +12,9 @@ bcrypt==3.1.7
 certifi==2019.11.28
 cffi==1.14.0
 chardet==3.0.4
+codecov==2.0.22
 contextvars==2.4
+coverage==5.0.4
 cryptography==2.8
 decorator==4.4.2
 h11==0.8.1
