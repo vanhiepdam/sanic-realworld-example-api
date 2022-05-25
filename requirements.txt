@@ -50,7 +50,7 @@ py==1.8.1
 pycparser==2.20
 pycrypto==2.6.1
 Pygments==2.6.1
-PyJWT==1.7.1
+PyJWT==2.4.0
 pyparsing==2.4.6
 pytest==5.4.1
 python-dateutil==2.8.1
