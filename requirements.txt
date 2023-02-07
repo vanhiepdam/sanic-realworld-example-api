@@ -15,7 +15,7 @@ chardet==3.0.4
 codecov==2.0.22
 contextvars==2.4
 coverage==5.0.4
-cryptography==2.8
+cryptography==39.0.1
 decorator==4.4.2
 h11==0.8.1
 h2==3.2.0
